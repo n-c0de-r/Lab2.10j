@@ -41,7 +41,8 @@ public class DateEngine {
 	public String add(String strA, String strN) {
 		A = toJulianDate(strA);
 		int num = Integer.parseInt(strN);
-		return "" + (A.getNumber()+num);
+		JulianDate jd = new JulianDate(A.getNumber()+num);
+		return "" + jd.toGregorianDate();
 	}
 	
 	/**
@@ -54,7 +55,8 @@ public class DateEngine {
 	public String subtract(String strA, String strN) {
 		A = toJulianDate(strA);
 		int num = Integer.parseInt(strN);
-		return "" + (A.getNumber()-num);
+		JulianDate jd = new JulianDate(A.getNumber()-num);
+		return "" + jd.toGregorianDate();
 	}
 	
 	/**
