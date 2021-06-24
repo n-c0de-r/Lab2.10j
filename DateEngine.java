@@ -1,4 +1,3 @@
-import javax.naming.directory.AttributeInUseException;
 
 /**
  * The main part doing the calculations based on former labs.
@@ -22,37 +21,35 @@ public class DateEngine {
 	}
 	
 	/**
-	 * Unites two given Sets to a new Set.
+	 * Gets a weekday from a JulianDate.
 	 * 
-	 * @param setA	The main set.
-	 * @param setB	The second set to merge to the first.
-	 * @return		Resulting Set merged from the given two.
+	 * @param date	The date to convert and check as String.
+	 * @return		Resulting day name as String.
 	 */
-	public String weekday(String stringA) {
-		A = toJulianDate(stringA);
+	public String weekday(String date) {
+		A = toJulianDate(date);
 		return A.getWeekday();
 	}
 	
 	/**
-	 * Intersects two given Sets to a new Set.
+	 * Adds one number to a given JulianDate.
 	 * 
-	 * @param setA	The main set.
-	 * @param setB	The second set to check for intersection with the first.
-	 * @return		Resulting Set of intersecting from the given two.
+	 * @param setA	The date as String
+	 * @param strN	Number to add as String.
+	 * @return		Resulting number as String.
 	 */
-//	public String intersection(String setA, String setB) {
-//		A = toSet(setA);
-//		B = toSet(setB);
-//		res = A.intersection(B);
-//		return res.toString();
-//	}
+	public String add(String strA, String strN) {
+		A = toJulianDate(strA);
+		int num = Integer.parseInt(strN);
+		return "" + (A.getNumber()+num);
+	}
 	
 	/**
-	 * Subtracts one Set from another.
+	 * Subtracts one number from a given JulianDate.
 	 * 
-	 * @param setA	The main set.
-	 * @param setB	The second set to subtract from the first.
-	 * @return		Resulting Set of subtracting from the given two.
+	 * @param setA	The date as String
+	 * @param strN	Number to subtract as String.
+	 * @return		Resulting number as String.
 	 */
 	public String subtract(String strA, String strN) {
 		A = toJulianDate(strA);
@@ -61,29 +58,30 @@ public class DateEngine {
 	}
 	
 	/**
-	 * Getter method to return the number of elements of a Set.
+	 * Subtracts one JulianDate from another.
 	 * 
-	 * @param set	Given Set to check the number of elements.
-	 * @return		String containing the number of elements of a Set.
+	 * @param strA	The first date as String.
+	 * @param strB	The second date as String.
+	 * @return		Resulting difference/distance of two dates in days as absolute Integer.
 	 */
-//	public String length(String str) {
-//		A = toSet(str);
-//		int len = A.length();
-//		return Integer.toString(len);
-//	}
+	public String difference(String strA, String strB) {
+		A = toJulianDate(strA);
+		B = toJulianDate(strB);
+		int num = A.getNumber()-B.getNumber();
+		return "" + Math.abs(num);
+	}
 	
 	/**
-	 * Setter method to turn given Strings to a Set
+	 * Setter method to turn given Strings to a JulianDate
 	 * 
 	 * @param str	String to be converted.
-	 * @return		Resulting Set of Characters of the input String.
+	 * @return		Resulting JulianDate objet of the input String.
 	 */
 	private JulianDate toJulianDate(String str) {
 		String[] nums = str.split("\\.");
-		System.out.println(nums.length);
-		int year = Integer.parseInt(nums[0]);
+		int day = Integer.parseInt(nums[0]);
 		int month = Integer.parseInt(nums[1]);
-		int day = Integer.parseInt(nums[2]);
+		int year = Integer.parseInt(nums[2]);
 		JulianDate jd = new JulianDate(year, month, day);
 		return jd;
 	}
