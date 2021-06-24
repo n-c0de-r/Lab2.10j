@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -57,8 +58,11 @@ public class DateGUI implements ActionListener {
 
 		contentPane.add(inputPanel, BorderLayout.NORTH);
 		
-		JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
+		JPanel buttonPanel = new JPanel(new GridLayout(3, 2));
 
+		number = new JTextField("Number to subtract from or add to a date.");
+		buttonPanel.add(number);
+		addButton(buttonPanel, "Clear");
 		addButton(buttonPanel, "Weekday");
 		addButton(buttonPanel, "Days between");
 		
@@ -83,15 +87,16 @@ public class DateGUI implements ActionListener {
 		String command = event.getActionCommand();
 		String A = dateA.getText();
 		String B = dateB.getText();
+		String num = number.getText();
 		String str = "";
 		if (command.equals("Weekday")) {
 			str = calc.weekday(A);
 		} else if (command.equals("Days between")) {
 			str =  calc.difference(A, B);
 		} else if (command.equals("Add number")) {
-			str = calc.add(A, B);
+			str = calc.add(A, num);
 		} else if (command.equals("Subtract number")) {
-			str =  calc.subtract(A, B);
+			str =  calc.subtract(A, num);
 		} else if (command.equals("Clear Fields")) {
 			clear();
 		}
